@@ -3,24 +3,57 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #4CAF50;
+  --primary-dark: #388E3C;
+  
+  /* Modern Shadow System */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.05);
 }
 
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-primary: var(--primary);
+  --color-primary-dark: var(--primary-dark);
 }
 
 body {
-  background: var(--background);
+  background: #f8fafc; /* Slightly off-white for better shadow contrast */
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer components {
+  .minimal-card {
+    @apply bg-white dark:bg-black rounded-2xl border border-gray-100/50 dark:border-white/5 transition-all duration-300;
+    box-shadow: var(--shadow-md);
+  }
+  
+  .minimal-card:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+
+  .glass-card {
+    @apply bg-white/80 dark:bg-black/80 backdrop-blur-md rounded-2xl border border-white/20 dark:border-white/10;
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .hover-lift {
+    @apply transition-all duration-300;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+  }
+}
+
+.dark body {
+  background: #000000;
+}
+
